@@ -6,13 +6,15 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>yswlht</title>
+  <title>微信支付搭建 | yswlht</title>
   <meta name="author" content="yswlht">
+  
+  <meta name="description" content="微信支付">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="微信支付搭建"/>
   <meta property="og:site_name" content="yswlht"/>
 
   
@@ -111,51 +113,33 @@ var _hmt = _hmt || [];
 
   <div class="container">
   	<div class="content">
-    	 <div class="page-header logo">
-  <h1>nothing is impossible, if you strive<span class="blink-fast">∎</span></h1>
-</div>
+    	 
 
-<div class="row page">
 
 	
+		<div class="page-header">
+			<h1> 微信支付搭建</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
 	<div class="col-md-9">
 	
 
-		<div class="slogan">
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> 微信支付
+		 </div> <!-- alert -->
+	  		
 
-
-		<i class="fa fa-heart blink-slow"></i>
-
-		Keep and carry on.
-
-</div>    
-
-		<div id="top_search"></div>
-		<div class="mypage">
-		
-		<!-- title and entry -->
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2020/03/10/微信支付搭建/" title="微信支付">微信支付搭建</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2020-03-10  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>这是基于SpringBoot搭建的微信支付系统，使用的是JS支付，别的支付方式暂时不会。</p>
+	  <p>这是基于SpringBoot搭建的微信支付系统，使用的是JS支付，别的支付方式暂时不会。</p>
 <p>首先在pom.xml里添加依赖，可能会缺一些依赖，但问题不大</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 微信扫码支付依赖 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;jdom&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jdom&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.qcloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;cos_api&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.4.4&lt;/version&gt;</span><br><span class="line">    &lt;exclusions&gt;</span><br><span class="line">        &lt;exclusion&gt;</span><br><span class="line">            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;</span><br><span class="line">        &lt;/exclusion&gt;</span><br><span class="line">    &lt;/exclusions&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 二维码 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.3.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;javase&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.3.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;fastjson&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.56&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;3.9&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
@@ -175,202 +159,94 @@ var _hmt = _hmt || [];
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class WechatPay &#123;</span><br><span class="line"></span><br><span class="line">    /** 微信开发平台应用ID（公众号ID）*/</span><br><span class="line">    public static final String APP_ID = <span class="string">"xxxxxxxxxxxx"</span>;</span><br><span class="line"></span><br><span class="line">    /** 商户号（商户号ID） */</span><br><span class="line">    public static final String MCH_ID = <span class="string">"xxxxxxxx"</span>;</span><br><span class="line"></span><br><span class="line">    /** API key（商户号里面的） */</span><br><span class="line">    public static final String API_KEY = <span class="string">"xxxxxxxx"</span>;</span><br><span class="line"></span><br><span class="line">    /** 发起支付的Ip */</span><br><span class="line">    public static final String CREATE_IP = <span class="string">"127.0.0.1"</span>;</span><br><span class="line"></span><br><span class="line">    /** 回调地址（需要外网可以访问的IP） */</span><br><span class="line">    public static final String  NOTIFY_URL = <span class="string">"xxx.xxx.xxx/xxx/xxxx"</span>;</span><br><span class="line"></span><br><span class="line">    /** 微信统一下单接口 */</span><br><span class="line">    public static final String UFDODER_URL = <span class="string">"https://api.mch.weixin.qq.com/pay/unifiedorder"</span>;</span><br><span class="line"></span><br><span class="line">    /** 应用对应的凭证（在公众号里面） */</span><br><span class="line">    public static final String APP_SECRET = <span class="string">"xxxxxxxxxx"</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>最后的返回值是一个图片，可以用WechatUtil.writerPayImage(response, wechatPayService.wxPayUrl())来返回给前端一张二维码，用户扫码成功后会调用NOTIFY_URL里的接口，接口方法如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">public HttpResult&lt;Object&gt; payForCourse(HttpServletRequest request, HttpServletResponse response) throws Exception &#123;</span><br><span class="line">	Integer bool = 0;</span><br><span class="line">	//商户订单号</span><br><span class="line">	String outTradeNo = null;</span><br><span class="line">	String xmlContent = <span class="string">"&lt;xml&gt;"</span> +</span><br><span class="line">			<span class="string">"&lt;return_code&gt;&lt;![CDATA[FAIL]]&gt;&lt;/return_code&gt;"</span> +</span><br><span class="line">			<span class="string">"&lt;return_msg&gt;&lt;![CDATA[签名失败]]&gt;&lt;/return_msg&gt;"</span> +</span><br><span class="line">			<span class="string">"&lt;/xml&gt;"</span>;</span><br><span class="line">	try &#123;</span><br><span class="line">		String requstXml = WechatUtil.getStreamString(request.getInputStream());</span><br><span class="line">		System.out.println(<span class="string">"requstXml : "</span> + requstXml);</span><br><span class="line">		Map&lt;String,String&gt; map = WechatUtil.xmlToMap(requstXml);</span><br><span class="line">		String returnCode = map.get(WechatConstants.RETURN_CODE);</span><br><span class="line">		//校验一下</span><br><span class="line">		<span class="keyword">if</span> (StringUtils.isNotBlank(returnCode) &amp;&amp; StringUtils.equals(returnCode, <span class="string">"SUCCESS"</span>) &amp;&amp; WechatUtil.isSignatureValid(map, WechatPay.API_KEY, signType)) &#123;</span><br><span class="line">			//商户订单号</span><br><span class="line">			outTradeNo = map.get(<span class="string">"out_trade_no"</span>);</span><br><span class="line">			System.out.println(<span class="string">"outTradeNo : "</span>+ outTradeNo);</span><br><span class="line">			//微信支付订单号</span><br><span class="line">			String transactionId = map.get(<span class="string">"transaction_id"</span>);</span><br><span class="line">			System.out.println(<span class="string">"transactionId : "</span>+ transactionId);</span><br><span class="line">			//支付完成时间</span><br><span class="line">			SimpleDateFormat payFormat= new SimpleDateFormat(<span class="string">"yyyyMMddHHmmss"</span>);</span><br><span class="line">			Date payDate = payFormat.parse(map.get(<span class="string">"time_end"</span>));</span><br><span class="line"></span><br><span class="line">			SimpleDateFormat systemFormat= new SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">			System.out.println(<span class="string">"支付时间："</span> + systemFormat.format(payDate));</span><br><span class="line">			//获得之前储存的值然后修改订单状态为已支付并删除redis里储存的值</span><br><span class="line">			Integer orderId = (Integer) redisUtil.get(outTradeNo);</span><br><span class="line">			redisUtil.del(outTradeNo);</span><br><span class="line">			xmlContent = <span class="string">"&lt;xml&gt;"</span> +</span><br><span class="line">					<span class="string">"&lt;return_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/return_code&gt;"</span> +</span><br><span class="line">					<span class="string">"&lt;return_msg&gt;&lt;![CDATA[OK]]&gt;&lt;/return_msg&gt;"</span> +</span><br><span class="line">					<span class="string">"&lt;/xml&gt;"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; catch (Exception e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">	WechatUtil.responsePrint(response, xmlContent);</span><br><span class="line">	<span class="keyword">if</span> (bool == 1) &#123;</span><br><span class="line">		<span class="built_in">return</span> HttpResult.ok(<span class="string">"付款成功"</span>);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">return</span> HttpResult.error(<span class="string">"付款失败"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-	
-	</div>
-  <a type="button" href="/2020/03/10/微信支付搭建/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2020/01/22/shiro-jwt模板/" title="shiro + jwt模板">shiro + jwt模板</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2020-01-22  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h3 id="pom依赖"><a href="#pom依赖" class="headerlink" title="pom依赖"></a>pom依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- lombok --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- mysql --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--shiro--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.4.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.4.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- jwt --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.auth0&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;java-jwt&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.4.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.9&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="jwtUtil"><a href="#jwtUtil" class="headerlink" title="jwtUtil"></a>jwtUtil</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">import com.auth0.jwt.JWT;</span><br><span class="line">import com.auth0.jwt.JWTVerifier;</span><br><span class="line">import com.auth0.jwt.algorithms.Algorithm;</span><br><span class="line">import com.auth0.jwt.exceptions.JWTDecodeException;</span><br><span class="line">import com.auth0.jwt.interfaces.DecodedJWT;</span><br><span class="line"></span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author hxt</span><br><span class="line"> * @date 2020/1/22 15:53</span><br><span class="line"> */</span><br><span class="line">public class JwtUtil &#123;</span><br><span class="line"></span><br><span class="line">    private static final long EXPIRE_TIME = 180 * 60 * 1000;</span><br><span class="line"></span><br><span class="line">    /** 校验token</span><br><span class="line">     * @param token 密钥</span><br><span class="line">     * @param secret 用户的密码</span><br><span class="line">     * */</span><br><span class="line">    public static boolean verify(String token, String username, String secret) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Algorithm algorithm = Algorithm.HMAC256(secret);</span><br><span class="line">            JWTVerifier verifier = JWT.require(algorithm)</span><br><span class="line">                    .withClaim(<span class="string">"username"</span>, username)</span><br><span class="line">                    .build();</span><br><span class="line">            DecodedJWT jwt = verifier.verify(token);</span><br><span class="line">            <span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            <span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** 获取token中的用户名 */</span><br><span class="line">    public static String getUsername(String token) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            DecodedJWT jwt = JWT.decode(token);</span><br><span class="line">            <span class="built_in">return</span> jwt.getClaim(<span class="string">"username"</span>).asString();</span><br><span class="line">        &#125; catch (JWTDecodeException e) &#123;</span><br><span class="line">            <span class="built_in">return</span> null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** 加密</span><br><span class="line">     * @param secret 用户的密码</span><br><span class="line">     * */</span><br><span class="line">    public static String sign(String username, String secret) &#123;</span><br><span class="line">        Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);</span><br><span class="line">        Algorithm algorithm = Algorithm.HMAC256(secret);</span><br><span class="line">        <span class="built_in">return</span> JWT.create()</span><br><span class="line">                .withClaim(<span class="string">"username"</span>, username)</span><br><span class="line">                .withExpiresAt(date)</span><br><span class="line">                .sign(algorithm);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="jwtToken"><a href="#jwtToken" class="headerlink" title="jwtToken"></a>jwtToken</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.authc.AuthenticationToken;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author hxt</span><br><span class="line"> * @date 2020/1/22 15:54</span><br><span class="line"> */</span><br><span class="line">public class JwtToken implements AuthenticationToken &#123;</span><br><span class="line"></span><br><span class="line">    private String token;</span><br><span class="line"></span><br><span class="line">    public JwtToken(String token) &#123;</span><br><span class="line">        this.token = token;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Object <span class="function"><span class="title">getPrincipal</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> token;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Object <span class="function"><span class="title">getCredentials</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> token;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="jwtFilter"><a href="#jwtFilter" class="headerlink" title="jwtFilter"></a>jwtFilter</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">import com.example.demo.common.JwtToken;</span><br><span class="line">import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;</span><br><span class="line">import org.apache.commons.lang3.StringUtils;</span><br><span class="line">import org.springframework.http.HttpStatus;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line"></span><br><span class="line">import javax.servlet.ServletRequest;</span><br><span class="line">import javax.servlet.ServletResponse;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author hxt</span><br><span class="line"> * @date 2020/1/22 15:56</span><br><span class="line"> */</span><br><span class="line">public class JwtFilter extends BasicHttpAuthenticationFilter &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) &#123;</span><br><span class="line">        HttpServletRequest req = (HttpServletRequest) request;</span><br><span class="line">        String authorization = req.getHeader(<span class="string">"cok"</span>);</span><br><span class="line">        <span class="built_in">return</span> StringUtils.isNotEmpty(authorization);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception &#123;</span><br><span class="line">        HttpServletRequest httpServletRequest = (HttpServletRequest) request;</span><br><span class="line">        String authorization = httpServletRequest.getHeader(<span class="string">"cok"</span>);</span><br><span class="line">        JwtToken token = new JwtToken(authorization);</span><br><span class="line">        getSubject(request, response).login(token);</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) &#123;</span><br><span class="line">        <span class="keyword">if</span> (isLoginAttempt(request, response)) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                executeLogin(request, response);</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                response401(request, response);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception &#123;</span><br><span class="line">        HttpServletRequest httpServletRequest = (HttpServletRequest) request;</span><br><span class="line">        HttpServletResponse httpServletResponse = (HttpServletResponse) response;</span><br><span class="line">        <span class="keyword">if</span> (httpServletRequest.getMethod().equals(RequestMethod.OPTIONS.name())) &#123;</span><br><span class="line">            httpServletResponse.setStatus(HttpStatus.OK.value());</span><br><span class="line">            <span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> super.preHandle(request, response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void response401(ServletRequest req, ServletResponse resp) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            HttpServletResponse httpServletResponse = (HttpServletResponse) resp;</span><br><span class="line">            httpServletResponse.sendRedirect(<span class="string">"/error"</span>);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            //<span class="keyword">do</span> nothing</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="自定义realm"><a href="#自定义realm" class="headerlink" title="自定义realm"></a>自定义realm</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">import com.example.demo.common.JwtToken;</span><br><span class="line">import com.example.demo.module.Users;</span><br><span class="line">import com.example.demo.service.UserService;</span><br><span class="line">import com.example.demo.utils.JwtUtil;</span><br><span class="line">import org.apache.shiro.authc.*;</span><br><span class="line">import org.apache.shiro.authz.AuthorizationException;</span><br><span class="line">import org.apache.shiro.authz.AuthorizationInfo;</span><br><span class="line">import org.apache.shiro.authz.SimpleAuthorizationInfo;</span><br><span class="line">import org.apache.shiro.realm.AuthorizingRealm;</span><br><span class="line">import org.apache.shiro.subject.PrincipalCollection;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author hxt</span><br><span class="line"> * @date 2020/1/22 16:02</span><br><span class="line"> */</span><br><span class="line">public class MyRealm extends AuthorizingRealm &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private UserService userService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean supports(AuthenticationToken token) &#123;</span><br><span class="line">        <span class="built_in">return</span> token instanceof JwtToken;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** 认证 */</span><br><span class="line">    @Override</span><br><span class="line">    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException &#123;</span><br><span class="line">        String token = (String) authenticationToken.getCredentials();</span><br><span class="line">        String username = JwtUtil.getUsername(token);</span><br><span class="line">        <span class="keyword">if</span> (username == null) &#123;</span><br><span class="line">            throw new AccountException(<span class="string">"没接收到用户名"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        // 到数据库查找用户</span><br><span class="line">        Users user = userService.getUsers();</span><br><span class="line">        <span class="keyword">if</span> (user == null) &#123;</span><br><span class="line">            throw new UnknownAccountException(<span class="string">"没找到用户"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!JwtUtil.verify(token, username, user.getUsersPassword())) &#123;</span><br><span class="line">            throw new AuthenticationException(<span class="string">"Username or password error"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> new SimpleAuthenticationInfo(token, token, <span class="string">"user_realm"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** 授权 */</span><br><span class="line">    @Override</span><br><span class="line">    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) &#123;</span><br><span class="line">        <span class="keyword">if</span> (principalCollection == null) &#123;</span><br><span class="line">            throw new AuthorizationException(<span class="string">"未找到请求体"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        String username = JwtUtil.getUsername(principalCollection.toString());</span><br><span class="line">        // 查找用户权限</span><br><span class="line">        String role = <span class="string">""</span>;</span><br><span class="line">        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();</span><br><span class="line">        info.addStringPermission(role);</span><br><span class="line">        <span class="built_in">return</span> info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="ShiroConfig"><a href="#ShiroConfig" class="headerlink" title="ShiroConfig"></a>ShiroConfig</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">package com.example.demo.config;</span><br><span class="line"></span><br><span class="line">import com.example.demo.filter.JwtFilter;</span><br><span class="line">import com.example.demo.realm.MyRealm;</span><br><span class="line">import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;</span><br><span class="line">import org.apache.shiro.mgt.DefaultSubjectDAO;</span><br><span class="line">import org.apache.shiro.spring.LifecycleBeanPostProcessor;</span><br><span class="line">import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;</span><br><span class="line">import org.apache.shiro.spring.web.ShiroFilterFactoryBean;</span><br><span class="line">import org.apache.shiro.web.mgt.DefaultWebSecurityManager;</span><br><span class="line">import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.context.annotation.DependsOn;</span><br><span class="line"></span><br><span class="line">import javax.servlet.Filter;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.LinkedHashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author hxt</span><br><span class="line"> * @date 2020/1/22 16:06</span><br><span class="line"> */</span><br><span class="line">@Configuration</span><br><span class="line">public class ShiroConfig &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**配置自己的Realm*/</span><br><span class="line">    @Bean</span><br><span class="line">    MyRealm <span class="function"><span class="title">myRealm</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> new MyRealm();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**把自己的Realm加入容器*/</span><br><span class="line">    @Bean(<span class="string">"securityManager"</span>)</span><br><span class="line">    public DefaultWebSecurityManager <span class="function"><span class="title">securityManager</span></span>() &#123;</span><br><span class="line">        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();</span><br><span class="line">        manager.setRealm(myRealm());</span><br><span class="line"></span><br><span class="line">        // 去除shiro中的session</span><br><span class="line">        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();</span><br><span class="line">        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();</span><br><span class="line">        defaultSessionStorageEvaluator.setSessionStorageEnabled(<span class="literal">false</span>);</span><br><span class="line">        subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);</span><br><span class="line">        manager.setSubjectDAO(subjectDAO);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> manager;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean(name = <span class="string">"shiroFilter"</span>)</span><br><span class="line">    ShiroFilterFactoryBean <span class="function"><span class="title">shiroFilterFactoryBean</span></span>() &#123;</span><br><span class="line">        ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Filter&gt; filterMap = new HashMap&lt;&gt;(0);</span><br><span class="line">        // 配置jwt拦截器</span><br><span class="line">        filterMap.put(<span class="string">"jwt"</span>, new JwtFilter());</span><br><span class="line">        bean.setFilters(filterMap);</span><br><span class="line">        //就是被拦截下来的请求暂时都换成这个</span><br><span class="line">        bean.setLoginUrl(<span class="string">"/error"</span>);</span><br><span class="line"></span><br><span class="line">        bean.setSecurityManager(securityManager());</span><br><span class="line">        Map&lt;String, String&gt; map = new LinkedHashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">"/**"</span>, <span class="string">"jwt"</span>);</span><br><span class="line">        map.put(<span class="string">"/error"</span>, <span class="string">"anon"</span>);</span><br><span class="line">        bean.setFilterChainDefinitionMap(map);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> bean;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /* 添加注解权限 */</span><br><span class="line">    @Bean</span><br><span class="line">    @DependsOn(<span class="string">"lifecycleBeanPostProcessor"</span>)</span><br><span class="line">    public DefaultAdvisorAutoProxyCreator <span class="function"><span class="title">defaultAdvisorAutoProxyCreator</span></span>() &#123;</span><br><span class="line">        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();</span><br><span class="line">        defaultAdvisorAutoProxyCreator.setProxyTargetClass(<span class="literal">true</span>);</span><br><span class="line">        <span class="built_in">return</span> defaultAdvisorAutoProxyCreator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public LifecycleBeanPostProcessor <span class="function"><span class="title">lifecycleBeanPostProcessor</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> new LifecycleBeanPostProcessor();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(DefaultWebSecurityManager securityManager) &#123;</span><br><span class="line">        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();</span><br><span class="line">        advisor.setSecurityManager(securityManager);</span><br><span class="line">        <span class="built_in">return</span> advisor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>配置完成后就可以在Controller使用了，在需要登录才能访问的接口上访添加@RequiresAuthentication就行了。</p>
-
-	
-	</div>
-  <a type="button" href="/2020/01/22/shiro-jwt模板/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2020/01/20/hello-world/" title="Hello World">Hello World</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2020-01-20  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-	
-	</div>
-  <a type="button" href="/2020/01/20/hello-world/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-
-		</div>
-
-		<!-- pagination -->
-		<div>
-  		<center>
-		<div class="pagination">
-
-   
-</div>
-
-  		</center>
-		</div>
-
-		
-		
-	</div> <!-- col-md-9 -->
-
-	
-		<div class="col-md-3">
-	<div id="sidebar">
-	
-			
-  <div id="site_search">
-   <div class="form-group">
-    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
-   </div>  
-  <div id="local-search-result"></div>
-  </div>
-
-
-		
-			
-	<div class="widget">
-		<h4>Categories</h4>
-		<ul class="tag_box inline list-unstyled">
-		
-			<li><a href="/categories/code/">code<span>1</span></a></li>
-		
-			<li><a href="/categories/springboot/">springboot<span>2</span></a></li>
-		
-		</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">public HttpResult&lt;Object&gt; payForCourse(HttpServletRequest request, HttpServletResponse response) throws Exception &#123;</span><br><span class="line">	Integer bool = 0;</span><br><span class="line">	//商户订单号</span><br><span class="line">	String outTradeNo = null;</span><br><span class="line">	String xmlContent = <span class="string">"&lt;xml&gt;"</span> +</span><br><span class="line">			<span class="string">"&lt;return_code&gt;&lt;![CDATA[FAIL]]&gt;&lt;/return_code&gt;"</span> +</span><br><span class="line">			<span class="string">"&lt;return_msg&gt;&lt;![CDATA[签名失败]]&gt;&lt;/return_msg&gt;"</span> +</span><br><span class="line">			<span class="string">"&lt;/xml&gt;"</span>;</span><br><span class="line">	try &#123;</span><br><span class="line">		String requstXml = WechatUtil.getStreamString(request.getInputStream());</span><br><span class="line">		System.out.println(<span class="string">"requstXml : "</span> + requstXml);</span><br><span class="line">		Map&lt;String,String&gt; map = WechatUtil.xmlToMap(requstXml);</span><br><span class="line">		String returnCode = map.get(WechatConstants.RETURN_CODE);</span><br><span class="line">		//校验一下</span><br><span class="line">		<span class="keyword">if</span> (StringUtils.isNotBlank(returnCode) &amp;&amp; StringUtils.equals(returnCode, <span class="string">"SUCCESS"</span>) &amp;&amp; WechatUtil.isSignatureValid(map, WechatPay.API_KEY, signType)) &#123;</span><br><span class="line">			//商户订单号</span><br><span class="line">			outTradeNo = map.get(<span class="string">"out_trade_no"</span>);</span><br><span class="line">			System.out.println(<span class="string">"outTradeNo : "</span>+ outTradeNo);</span><br><span class="line">			//微信支付订单号</span><br><span class="line">			String transactionId = map.get(<span class="string">"transaction_id"</span>);</span><br><span class="line">			System.out.println(<span class="string">"transactionId : "</span>+ transactionId);</span><br><span class="line">			//支付完成时间</span><br><span class="line">			SimpleDateFormat payFormat= new SimpleDateFormat(<span class="string">"yyyyMMddHHmmss"</span>);</span><br><span class="line">			Date payDate = payFormat.parse(map.get(<span class="string">"time_end"</span>));</span><br><span class="line"></span><br><span class="line">			SimpleDateFormat systemFormat= new SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">			System.out.println(<span class="string">"支付时间："</span> + systemFormat.format(payDate));</span><br><span class="line">			//获得之前储存的值然后修改订单状态为已支付并删除redis里储存的值</span><br><span class="line">			Integer orderId = (Integer) redisUtil.get(outTradeNo);</span><br><span class="line">			redisUtil.del(outTradeNo);</span><br><span class="line">			xmlContent = <span class="string">"&lt;xml&gt;"</span> +</span><br><span class="line">					<span class="string">"&lt;return_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/return_code&gt;"</span> +</span><br><span class="line">					<span class="string">"&lt;return_msg&gt;&lt;![CDATA[OK]]&gt;&lt;/return_msg&gt;"</span> +</span><br><span class="line">					<span class="string">"&lt;/xml&gt;"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; catch (Exception e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">	WechatUtil.responsePrint(response, xmlContent);</span><br><span class="line">	<span class="keyword">if</span> (bool == 1) &#123;</span><br><span class="line">		<span class="built_in">return</span> HttpResult.ok(<span class="string">"付款成功"</span>);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">return</span> HttpResult.error(<span class="string">"付款失败"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>	  
 	</div>
 
-		
-			
-	<div class="widget">
-		<h4>Tag Cloud</h4>
-		<ul class="tag_box inline list-unstyled">		
-		
-			<li><a href="/tags/wechat/">wechat<span>1</span></a></li>
-		
-			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
-		
-			<li><a href="/tags/shiro/">shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/jwt/">jwt<span>1</span></a></li>
-		
-		 
-		</ul>
-	</div>
+	<div>
+  	<center>
+	<div class="pagination">
 
-
-		
-			
-<div class="widget">
-  <h4>Recent Posts</h4>
-  <ul class="entry list-unstyled">
     
-      <li>
-        <a href="/2020/03/10/微信支付搭建/"  title="微信支付" ><i class="fa fa-file-o"></i>微信支付搭建</a>
-      </li>
     
-      <li>
-        <a href="/2020/01/22/shiro-jwt模板/"  title="shiro + jwt模板" ><i class="fa fa-file-o"></i>shiro + jwt模板</a>
-      </li>
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
     
-      <li>
-        <a href="/2020/01/20/hello-world/"  title="Hello World" ><i class="fa fa-file-o"></i>Hello World</a>
-      </li>
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-  </ul>
+    <a href="/2020/01/22/shiro-jwt模板/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
 </div>
 
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
 		
-			
-<div class="widget">
-	<h4>Links</h4>
-	<ul class="blogroll list-unstyled">
 	
-		<li><i class="fa fa-github"></i><a href="https://github.com/wzpan/hexo-theme-freemind" title="Freemind's Github repository." target="_blank"]);">Freemind</a></li>
-	
-		<li><i class="fa fa-github"></i><a href="https://github.com/kristopolous/BOOTSTRA.386" title="BOOTSTRA.386's Github repository." target="_blank"]);">BOOTSTRA.386</a></li>
-	
-		<li><i class="fa fa-github"></i><a href="https://github.com/blackshow/hexo-theme-freemind.386" title="Freemind.386's Github repository." target="_blank"]);">Freemind.386</a></li>
-	
-		<li><i class="fa fa-github"></i><a href="http://www.github.com/yswlht" title="My Github account." target="_blank"]);">My Github</a></li>
-	
-	</ul>
-</div>
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
 
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-03-10 
+	</div>
+	
 
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/springboot/">springboot<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/wechat/">wechat<span>1</span></a></li>
+    </ul>
+	</div>
 		
-	</div> <!-- sidebar -->
-</div> <!-- col-md-3 -->
 
+	<!-- toc -->
+	<div class="meta-widget">
 	
+	</div>
 	
-</div> <!-- row-fluid -->
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
 	</div>
   </div>
   <div class="container-narrow">
