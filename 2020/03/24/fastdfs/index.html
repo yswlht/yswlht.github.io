@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>fastdfs | yswlht</title>
+  <meta name="author" content="yswlht">
+  
+  <meta name="description" content="fastdfs">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="fastdfs"/>
+  <meta property="og:site_name" content="yswlht"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">yswlht</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> fastdfs</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> fastdfs
+		 </div> <!-- alert -->
+	  		
+
+	  <p>今天配置了一遍fastdfs，由于不是我的服务器，所以nginx方面没有试过，不过测试后是可以上传文件了的，所以无伤大雅。这里是<a href="https://www.jianshu.com/p/1c71ae024e5e" target="_blank" rel="noopener">原文</a>,下面就是配置过程。</p>
+<p>##tracker安装<br>安装libfastcommon、perl依赖，下载<a href="https://github.com/happyfish100/libfastcommon" target="_blank" rel="noopener">文件</a>，并上传到服务器，运行make.sh。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost usr]<span class="comment"># cd libfastcommon-master</span></span><br><span class="line">[root@localhost libfastcommon-master]<span class="comment"># ./make.sh</span></span><br><span class="line">[root@localhost libfastcommon-master]<span class="comment"># ./make.sh install</span></span><br><span class="line">[root@localhost libfastcommon-master]<span class="comment"># yum install perl</span></span><br></pre></td></tr></table></figure>
+
+<p>这里可能会有一个小问题，就是会跳出permission denied错误，我遇到的问题是make.sh没有【x】的全县，可以通过命令手动添加权限，简单粗暴。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost libfastcommon-master]<span class="comment"># chmod 777 make.sh</span></span><br></pre></td></tr></table></figure>
+
+<p>还要下载编译安装<a href="https://github.com/happyfish100/fastdfs" target="_blank" rel="noopener">fastdfs</a>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost usr] <span class="comment"># cd fastdfs-master</span></span><br><span class="line">[root@localhost fastdfs-master] <span class="comment"># ./make.sh</span></span><br><span class="line">[root@localhost fastdfs-master] <span class="comment"># ./make.sh  install</span></span><br></pre></td></tr></table></figure>
+
+<p>可能遇到的问题跟上面一样。然后创建fastdfs数据目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -pv /data/fastdfs/tracker</span><br></pre></td></tr></table></figure>
+
+<p>复制tracker.conf.sample到tracker.conf，并修改内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp etc/fdfs/tracker.conf.sample etc/fdfs/tracker.conf</span><br><span class="line">vim  etc/fdfs/tracker.conf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base_path=/data/fastdfs/tracker</span><br></pre></td></tr></table></figure>
+
+<p>这里又可能会遇到问题（其实是我自己遇到的），就是提示没有这个文件或目录，不用担心，直接进入到etc/fdfs里面，直接复制，不管地址。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/fdfs</span><br><span class="line">cp tracker.conf.sample tracker.conf</span><br><span class="line">vim tracker.conf</span><br></pre></td></tr></table></figure>
+
+<p>然后启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span>  /usr/bin</span><br><span class="line">fdfs_trackerd /etc/fdfs/tracker.conf restart</span><br></pre></td></tr></table></figure>
+
+<p>这里可以验证一下是否是22122端口。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># netstat -antp|grep trackerd</span></span><br><span class="line">tcp        0      0 0.0.0.0:22122           0.0.0.0:*               LISTEN      31046/fdfs_trackerd</span><br></pre></td></tr></table></figure>
+
+<p>##storage安装<br>接下来是storage的安装，你可以安装到不同的服务器，也可以安装到同一个服务器，这里我安装到同一个服务器，如果安装到不同的服务器，还需要下载安装fastdfs的配置，方法同上面一样。<br>然后是修改配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -pv /data/fastdfs/storage</span><br><span class="line">cp etc/fdfs/storage.conf.sample etc/fdfs/storage.conf</span><br><span class="line">vim  etc/fdfs/storage.conf</span><br></pre></td></tr></table></figure>
+
+<p>遇到相同报错，解决办法跟上面一样。接下来是修改内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">disabled=<span class="literal">false</span> <span class="comment">#启用配置文件</span></span><br><span class="line">group_name=group1 <span class="comment">#组名，根据实际情况修改</span></span><br><span class="line">port=23000 <span class="comment">#设置 storage 的端口号</span></span><br><span class="line">base_path=/data/fastdfs/storage <span class="comment">#设置 storage 的日志目录（需预先创建）</span></span><br><span class="line">store_path_count=1 <span class="comment">#存储路径个数，需要和 store_path 个数匹配</span></span><br><span class="line">store_path0=/data/fastdfs/storage <span class="comment">#存储路径</span></span><br><span class="line">tracker_server=192.168.1.177:22122 <span class="comment">#tracker 服务器的 IP 地址和端口号</span></span><br></pre></td></tr></table></figure>
+
+<p>然后启动。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/bin</span><br><span class="line">./fdfs_storaged  /etc/fdfs/storage.conf restart</span><br></pre></td></tr></table></figure>
+
+<p>##java<br>接下来是配置客户端的代码，使用的框架是springboot，首先是pom.xml里的配置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">	&lt;scope&gt;<span class="built_in">test</span>&lt;/scope&gt;</span><br><span class="line">	&lt;exclusions&gt;</span><br><span class="line">		&lt;exclusion&gt;</span><br><span class="line">			&lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;</span><br><span class="line">		&lt;/exclusion&gt;</span><br><span class="line">	&lt;/exclusions&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;com.github.tobato&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;fastdfs-client&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.26.1-RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后是application.yml。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fdfs:</span><br><span class="line">  so-timeout: 1500</span><br><span class="line">  connect-timeout: 600</span><br><span class="line">  pool:</span><br><span class="line">    jmx-enabled: <span class="literal">false</span></span><br><span class="line">  thumb-image:</span><br><span class="line">    width: 100</span><br><span class="line">    height: 100</span><br><span class="line">  tracker-list: 192.168.1.177:22122</span><br></pre></td></tr></table></figure>
+
+<p>tracker-list就是tracker服务器的地址。要记得把服务器的22122和23000端口打开。然后在运行文件上面添加@Import(FdfsClientConfig.class)注解。接下来就是上传的代码。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">private FastFileStorageClient mFastFileStorageClient;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">void contextLoads() throws FileNotFoundException &#123;</span><br><span class="line">	// 获取文件</span><br><span class="line">	File file = new File(<span class="string">"E:\\QMDownload\\timg.jpg"</span>);</span><br><span class="line">	String fileName=file.getName();</span><br><span class="line">	String extName = fileName.substring(fileName.lastIndexOf(<span class="string">"."</span>)+1);</span><br><span class="line">	FileInputStream inputStream=new FileInputStream(file);</span><br><span class="line">	// 上传文件</span><br><span class="line">	StorePath storePath = mFastFileStorageClient.uploadFile(inputStream, file.length(), extName, null);</span><br><span class="line">	// 上传的组，就是storage.conf里配置的group</span><br><span class="line">	System.out.println(storePath.getGroup());</span><br><span class="line">	// 上传的组里的地址</span><br><span class="line">	System.out.println(storePath.getPath());</span><br><span class="line">	// 上传的完整地址</span><br><span class="line">	System.out.println(storePath.getFullPath());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里上传的完整地址其实是在上面设置的/data/fastdfs/storage里面，具体的位置就是去掉组和前缀，比如上面这段代码运行后获取到的完整地址其实是group1/M00/00/00/J2Jd7l55fTqAcmPGAAB3uf-Qsig694.jpg，去掉group1/M00，后面就是storage里面的地址，一层层点进去就能找到文件。<br>这里给上nginx里面的相关配置，当然我上面说过，因为服务器原因我没试过，只测试过上传。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen       8888;</span><br><span class="line">	server_name  localhost;</span><br><span class="line">	location ~/group1/M00 &#123;</span><br><span class="line">		root /data/fastdfs/storage;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里没有测试过，这里没有测试过，这里没有测试过。结束了。</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2020/03/10/微信支付搭建/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-03-24 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/configuration/">configuration<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/linux/">linux<span>1</span></a></li> <li><a href="/tags/fastdfs/">fastdfs<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2020 yswlht
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
