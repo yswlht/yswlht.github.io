@@ -156,7 +156,7 @@ var _hmt = _hmt || [];
 	
 	
 		<p>今天配置了一遍fastdfs，由于不是我的服务器，所以nginx方面没有试过，不过测试后是可以上传文件了的，所以无伤大雅。这里是<a href="https://www.jianshu.com/p/1c71ae024e5e" target="_blank" rel="noopener">原文</a>,下面就是配置过程。</p>
-<p>##tracker安装<br>安装libfastcommon、perl依赖，下载<a href="https://github.com/happyfish100/libfastcommon" target="_blank" rel="noopener">文件</a>，并上传到服务器，运行make.sh。</p>
+<h2 id="tracker安装"><a href="#tracker安装" class="headerlink" title="tracker安装"></a>tracker安装</h2><p>安装libfastcommon、perl依赖，下载<a href="https://github.com/happyfish100/libfastcommon" target="_blank" rel="noopener">文件</a>，并上传到服务器，运行make.sh。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost usr]<span class="comment"># cd libfastcommon-master</span></span><br><span class="line">[root@localhost libfastcommon-master]<span class="comment"># ./make.sh</span></span><br><span class="line">[root@localhost libfastcommon-master]<span class="comment"># ./make.sh install</span></span><br><span class="line">[root@localhost libfastcommon-master]<span class="comment"># yum install perl</span></span><br></pre></td></tr></table></figure>
 
 <p>这里可能会有一个小问题，就是会跳出permission denied错误，我遇到的问题是make.sh没有【x】的全县，可以通过命令手动添加权限，简单粗暴。</p>
@@ -182,7 +182,7 @@ var _hmt = _hmt || [];
 <p>这里可以验证一下是否是22122端口。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># netstat -antp|grep trackerd</span></span><br><span class="line">tcp        0      0 0.0.0.0:22122           0.0.0.0:*               LISTEN      31046/fdfs_trackerd</span><br></pre></td></tr></table></figure>
 
-<p>##storage安装<br>接下来是storage的安装，你可以安装到不同的服务器，也可以安装到同一个服务器，这里我安装到同一个服务器，如果安装到不同的服务器，还需要下载安装fastdfs的配置，方法同上面一样。<br>然后是修改配置文件</p>
+<h2 id="storage安装"><a href="#storage安装" class="headerlink" title="storage安装"></a>storage安装</h2><p>接下来是storage的安装，你可以安装到不同的服务器，也可以安装到同一个服务器，这里我安装到同一个服务器，如果安装到不同的服务器，还需要下载安装fastdfs的配置，方法同上面一样。<br>然后是修改配置文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -pv /data/fastdfs/storage</span><br><span class="line">cp etc/fdfs/storage.conf.sample etc/fdfs/storage.conf</span><br><span class="line">vim  etc/fdfs/storage.conf</span><br></pre></td></tr></table></figure>
 
 <p>遇到相同报错，解决办法跟上面一样。接下来是修改内容。</p>
@@ -191,7 +191,7 @@ var _hmt = _hmt || [];
 <p>然后启动。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/bin</span><br><span class="line">./fdfs_storaged  /etc/fdfs/storage.conf restart</span><br></pre></td></tr></table></figure>
 
-<p>##java<br>接下来是配置客户端的代码，使用的框架是springboot，首先是pom.xml里的配置。</p>
+<h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><p>接下来是配置客户端的代码，使用的框架是springboot，首先是pom.xml里的配置。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">	&lt;scope&gt;<span class="built_in">test</span>&lt;/scope&gt;</span><br><span class="line">	&lt;exclusions&gt;</span><br><span class="line">		&lt;exclusion&gt;</span><br><span class="line">			&lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;</span><br><span class="line">		&lt;/exclusion&gt;</span><br><span class="line">	&lt;/exclusions&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;com.github.tobato&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;fastdfs-client&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.26.1-RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
 <p>然后是application.yml。</p>
@@ -390,17 +390,17 @@ var _hmt = _hmt || [];
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
-		
-			<li><a href="/tags/linux/">linux<span>1</span></a></li>
-		
 			<li><a href="/tags/shiro/">shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/fastdfs/">fastdfs<span>1</span></a></li>
 		
 			<li><a href="/tags/wechat/">wechat<span>1</span></a></li>
 		
 			<li><a href="/tags/jwt/">jwt<span>1</span></a></li>
 		
-			<li><a href="/tags/fastdfs/">fastdfs<span>1</span></a></li>
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/linux/">linux<span>1</span></a></li>
 		
 		 
 		</ul>
