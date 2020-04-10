@@ -135,6 +135,105 @@ var _hmt = _hmt || [];
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2020/04/10/rabbitMQ配置/" >rabbitMQ配置</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-04-10  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>由于电脑重装过一次，原本下载的rabbitMQ没了，而且可能是因为网络原因我下载的单位是B，所以就不下了，但是以前配置的demo还在，只是现在不能测试，以前测试的时候是通过的，现在通过网上的一些教程和自己的代码还原一下，因为不能测试，所以可能会讲错一些东西，等下次能测试的时候测试一遍再更新这篇文章。<br>我看的教程<a href="https://blog.csdn.net/qq_35387940/article/details/100514134" target="_blank" rel="noopener">原文</a>.<br>首先是依赖：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-boot-starter-amqp&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后是application.properties上的常量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring.application.name=spirng-boot-rabbitmq</span><br><span class="line">spring.rabbitmq.host=localhost</span><br><span class="line">spring.rabbitmq.port=5672</span><br><span class="line">spring.rabbitmq.username=admin</span><br><span class="line">spring.rabbitmq.password=admin</span><br></pre></td></tr></table></figure>
+
+<p>rabbitMQ常用的有三种交换机，我也正好都有代码。</p>
+	
+	</div>
+  <a type="button" href="/2020/04/10/rabbitMQ配置/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2020/04/10/定时任务调用服务层报空指针错误的解决方法/" >定时任务调用服务层报空指针错误的解决方法</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-04-10  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>在定时任务里是不能通过@Autowired的方式注入服务层的对象，会报空指针错误，原因是定时任务在服务类之前就加载了，这时服务层还没加载，所以会有空指针的错误，这里提供解决办法。<br>首先创建一个工具类继承ApplicationContextAware。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class ApplicationContextUtil implements ApplicationContextAware &#123;</span><br><span class="line"></span><br><span class="line">    private static ApplicationContext applicationContext;</span><br><span class="line"></span><br><span class="line">    public static ApplicationContext <span class="function"><span class="title">getApplicationContext</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> applicationContext;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException &#123;</span><br><span class="line">        ApplicationContextUtil.applicationContext = applicationContext;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Object getBean(String beanName)&#123;</span><br><span class="line">        <span class="built_in">return</span> applicationContext.getBean(beanName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在需要加载的类上添加一个名称用来在定时任务中找到对应的类。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Service(<span class="string">"windowService"</span>)</span><br><span class="line">public class WindowServiceImpl implements WindowService</span><br></pre></td></tr></table></figure>
+
+<p>然后就是在定时任务中创建对象,beanName里就是上面注解后面的名称。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private WindowService windowService = (WindowService) ApplicationContextUtil.getBean(<span class="string">"windowService"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>别忘记在定时类上面添加注解@DependsOn(“applicationContextUtil”)，否则还是会报空指针错误，原因是一样的。</p>
+
+	
+	</div>
+  <a type="button" href="/2020/04/10/定时任务调用服务层报空指针错误的解决方法/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2020/04/10/线程池配置/" >线程池配置</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-04-10  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>前几天做了一个系统，涉及到线程池的配置，这里记录下来以防忘记，原文请点击<a href="https://www.cnblogs.com/pejsidney/p/9001875.html" target="_blank" rel="noopener">这里</a>。</p>
+<p>先创建一个配置类</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableAsync</span><br><span class="line">public class ExecutorConfig &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger logger = LoggerFactory.getLogger(ExecutorConfig.class);</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Executor <span class="function"><span class="title">quickUserExecutor</span></span>() &#123;</span><br><span class="line">        logger.info(<span class="string">"start asyncServiceExecutor"</span>);</span><br><span class="line">        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();</span><br><span class="line">        //配置核心线程数</span><br><span class="line">        executor.setCorePoolSize(5);</span><br><span class="line">        //配置最大线程数</span><br><span class="line">        executor.setMaxPoolSize(5);</span><br><span class="line">        //配置队列大小</span><br><span class="line">        executor.setQueueCapacity(99999);</span><br><span class="line">        //配置线程池中的线程的名称前缀</span><br><span class="line">        executor.setThreadNamePrefix(<span class="string">"async-service-"</span>);</span><br><span class="line"></span><br><span class="line">        // rejection-policy：当pool已经达到max size的时候，如何处理新任务</span><br><span class="line">        // CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行</span><br><span class="line">        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());</span><br><span class="line">        //执行初始化</span><br><span class="line">        executor.initialize();</span><br><span class="line">        <span class="built_in">return</span> executor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2020/04/10/线程池配置/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2020/04/05/Springboot依赖/" >Springboot依赖</a>
 		</h3>
 		</div>
@@ -357,7 +456,7 @@ var _hmt = _hmt || [];
 		
 			<li><a href="/categories/configuration/">configuration<span>1</span></a></li>
 		
-			<li><a href="/categories/springboot/">springboot<span>3</span></a></li>
+			<li><a href="/categories/springboot/">springboot<span>6</span></a></li>
 		
 		</ul>
 	</div>
@@ -368,19 +467,23 @@ var _hmt = _hmt || [];
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
+			<li><a href="/tags/linux/">linux<span>2</span></a></li>
+		
+			<li><a href="/tags/rabbitMQ/">rabbitMQ<span>1</span></a></li>
+		
 			<li><a href="/tags/jwt/">jwt<span>1</span></a></li>
+		
+			<li><a href="/tags/wechat/">wechat<span>1</span></a></li>
+		
+			<li><a href="/tags/error/">error<span>1</span></a></li>
+		
+			<li><a href="/tags/shiro/">shiro<span>1</span></a></li>
 		
 			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
 		
 			<li><a href="/tags/fastdfs/">fastdfs<span>1</span></a></li>
 		
-			<li><a href="/tags/shiro/">shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/wechat/">wechat<span>1</span></a></li>
-		
-			<li><a href="/tags/others/">others<span>1</span></a></li>
-		
-			<li><a href="/tags/linux/">linux<span>2</span></a></li>
+			<li><a href="/tags/others/">others<span>2</span></a></li>
 		
 		 
 		</ul>
@@ -394,23 +497,23 @@ var _hmt = _hmt || [];
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2020/04/10/rabbitMQ配置/" ><i class="fa fa-file-o"></i>rabbitMQ配置</a>
+      </li>
+    
+      <li>
+        <a href="/2020/04/10/定时任务调用服务层报空指针错误的解决方法/" ><i class="fa fa-file-o"></i>定时任务调用服务层报空指针错误的解决方法</a>
+      </li>
+    
+      <li>
+        <a href="/2020/04/10/线程池配置/" ><i class="fa fa-file-o"></i>线程池配置</a>
+      </li>
+    
+      <li>
         <a href="/2020/04/05/Springboot依赖/" ><i class="fa fa-file-o"></i>Springboot依赖</a>
       </li>
     
       <li>
         <a href="/2020/04/01/Linux命令/"  title="Linux命令" ><i class="fa fa-file-o"></i>Linux命令</a>
-      </li>
-    
-      <li>
-        <a href="/2020/03/24/fastdfs/"  title="fastdfs" ><i class="fa fa-file-o"></i>fastdfs</a>
-      </li>
-    
-      <li>
-        <a href="/2020/03/10/微信支付搭建/"  title="微信支付" ><i class="fa fa-file-o"></i>微信支付搭建</a>
-      </li>
-    
-      <li>
-        <a href="/2020/01/22/shiro-jwt模板/"  title="shiro + jwt模板" ><i class="fa fa-file-o"></i>shiro + jwt模板</a>
       </li>
     
   </ul>
