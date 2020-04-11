@@ -135,6 +135,34 @@ var _hmt = _hmt || [];
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2020/04/11/springCloud配置文件及各种功能配置/" >springCloud配置文件及各种功能配置</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-04-11  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>今天学习并搭建了一个springCloud的demo，原本应该跟springboot一样不需要写下来的，但是springCloud还有一些配置需要记录下来，以及一些以后也许用得到的功能，原文点击<a href="https://blog.csdn.net/hellozpc/article/details/83692496" target="_blank" rel="noopener">这里</a>.<br>springCloud的依赖就不打了，反正IDEA创建的时候就会自己添加的。然后就是application.yml文件了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###服务端口号</span></span><br><span class="line">server:</span><br><span class="line">  port: 8100</span><br><span class="line"><span class="comment">###服务名称</span></span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: app-eureka-center</span><br><span class="line">  security:</span><br><span class="line">    basic:</span><br><span class="line">      <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment">#开启基于HTTP basic的认证</span></span><br><span class="line">    user: <span class="comment">#配置用户的账号信息</span></span><br><span class="line">      name: hxt</span><br><span class="line">      password: 123456</span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    <span class="comment">#注册中心地址</span></span><br><span class="line">    hostname: 127.0.0.1</span><br><span class="line">  <span class="comment">###客户端调用地址</span></span><br><span class="line">  client:</span><br><span class="line">    serviceUrl:</span><br><span class="line">      defaultZone: http://<span class="variable">$&#123;spring.security.user.name&#125;</span>:<span class="variable">$&#123;spring.security.user.password&#125;</span>@<span class="variable">$&#123;eureka.instance.hostname&#125;</span>:7100/eureka/</span><br><span class="line">    <span class="comment">###是否将自己注册到Eureka服务中,因为该应用本身就是注册中心，不需要再注册自己（集群的时候为true）</span></span><br><span class="line">    register-with-eureka: <span class="literal">true</span></span><br><span class="line">    <span class="comment">###是否从Eureka中获取注册信息,因为自己为注册中心,不会在该应用中的检索服务信息</span></span><br><span class="line">    fetch-registry: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2020/04/11/springCloud配置文件及各种功能配置/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2020/04/10/rabbitMQ配置/" >rabbitMQ配置</a>
 		</h3>
 		</div>
@@ -456,7 +484,7 @@ var _hmt = _hmt || [];
 		
 			<li><a href="/categories/configuration/">configuration<span>1</span></a></li>
 		
-			<li><a href="/categories/springboot/">springboot<span>6</span></a></li>
+			<li><a href="/categories/springboot/">springboot<span>7</span></a></li>
 		
 		</ul>
 	</div>
@@ -473,17 +501,19 @@ var _hmt = _hmt || [];
 		
 			<li><a href="/tags/shiro/">shiro<span>1</span></a></li>
 		
-			<li><a href="/tags/rabbitMQ/">rabbitMQ<span>1</span></a></li>
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
 		
 			<li><a href="/tags/error/">error<span>1</span></a></li>
 		
-			<li><a href="/tags/wechat/">wechat<span>1</span></a></li>
-		
-			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
-		
 			<li><a href="/tags/others/">others<span>2</span></a></li>
 		
+			<li><a href="/tags/rabbitMQ/">rabbitMQ<span>1</span></a></li>
+		
+			<li><a href="/tags/springCloud/">springCloud<span>1</span></a></li>
+		
 			<li><a href="/tags/jwt/">jwt<span>1</span></a></li>
+		
+			<li><a href="/tags/wechat/">wechat<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -495,6 +525,10 @@ var _hmt = _hmt || [];
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2020/04/11/springCloud配置文件及各种功能配置/" ><i class="fa fa-file-o"></i>springCloud配置文件及各种功能配置</a>
+      </li>
     
       <li>
         <a href="/2020/04/10/rabbitMQ配置/" ><i class="fa fa-file-o"></i>rabbitMQ配置</a>
@@ -510,10 +544,6 @@ var _hmt = _hmt || [];
     
       <li>
         <a href="/2020/04/05/Springboot依赖/" ><i class="fa fa-file-o"></i>Springboot依赖</a>
-      </li>
-    
-      <li>
-        <a href="/2020/04/01/Linux命令/"  title="Linux命令" ><i class="fa fa-file-o"></i>Linux命令</a>
       </li>
     
   </ul>
